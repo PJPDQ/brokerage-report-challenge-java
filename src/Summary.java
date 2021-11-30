@@ -53,7 +53,8 @@ public class Summary {
 	private LocalDateTime earliestDateAdviser(String adviser) {
 		LocalDateTime earliest = LocalDateTime.MAX;
 		for (Brokerage b: this.brokers) {
-			if ( b.getAdviser().equalsIgnoreCase(adviser) && b.getDateTime().isBefore(earliest) ) {
+			if ( b.getAdviser().equalsIgnoreCase(adviser) && 
+					b.getDateTime().isBefore(earliest) ) {
 				earliest = b.getDateTime();
 			}
 		}
@@ -64,7 +65,8 @@ public class Summary {
 		LocalDateTime latest = LocalDateTime.MIN;
 		
 		for (Brokerage b: this.brokers) {
-			if ( b.getAdviser().equalsIgnoreCase(adviser) && b.getDateTime().isAfter(latest) ) {
+			if ( b.getAdviser().equalsIgnoreCase(adviser) && 
+					b.getDateTime().isAfter(latest) ) {
 				latest = b.getDateTime();
 			}
 		}
@@ -79,8 +81,6 @@ public class Summary {
 		DateTimeFormatter format1 = DateTimeFormatter.ofPattern("dd MMM yyyy");
 		for (Entry<String, ArrayList<Brokerage>> entry: this.summary.entrySet()) {
 			String key = entry.getKey();
-			ArrayList<Brokerage> value = entry.getValue();
-			System.out.printf(key + " ", value.size());
 			float sum = this.getSumValue(key);
 			LocalDateTime early = this.earliestDateAdviser(key);
 			LocalDateTime late = this.latestDateAdviser(key);
